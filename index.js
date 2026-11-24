@@ -17,11 +17,18 @@ app.use(methodOverride("__method"));
 const { error } = require('console');
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
+const isCloud = process.env.DB_HOST && process.env.DB_HOST !== 'localhost';
+
 const Connection = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
   database: process.env.DB_NAME || 'Learning_app',
-  password: process.env.DB_PASSWORD
+  password: process.env.DB_PASSWORD,
+  port: Number(process.env.DB_PORT) || (isCloud ? 4000 : 3306),
+  ssl: (process.env.DB_SSL === "true" || isCloud) ? {
+    minVersion: 'TLSv1.2',
+    rejectUnauthorized: true
+  } : undefined
 });
 
 // let q = "INSERT INTO user (id, username , email, password) VALUES ?";
