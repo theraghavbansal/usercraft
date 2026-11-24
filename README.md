@@ -2,12 +2,18 @@
 
 A full-stack CRUD user management web application built with **Node.js**, **Express.js**, **MySQL**, and **EJS**. It features user creation, listing, updating with password verification, deletion, and bulk mock data generation using Faker.js.
 
+[![Live Demo](https://img.shields.io/badge/Demo-Live_Website-success?style=for-the-badge&logo=render)](https://usercraft.onrender.com)
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+🔗 **Live Deployment:** [https://usercraft.onrender.com](https://usercraft.onrender.com)
+
 ---
 
 ## 🚀 Features
 
-- **Full CRUD with MySQL**: Complete database integration using `mysql2`.
-- **Password Verification**: Updating user details requires verifying their existing password.
+- **Full CRUD with MySQL**: Complete database integration using the `mysql2` driver.
+- **Cloud & Local Database Support**: Seamlessly connects to local MySQL or cloud MySQL (TiDB Cloud / Aiven) with automatic TLS/SSL encryption.
+- **Password Verification**: Updating user details requires verifying their existing password for security.
 - **Form Method Override**: Emulates `PATCH` and `DELETE` requests directly from HTML forms using `method-override`.
 - **Mock Data Generation**: Capability to seed database with realistic fake users via `@faker-js/faker`.
 - **Environment Security**: Sensitive database credentials isolated via `.env` files.
@@ -18,7 +24,7 @@ A full-stack CRUD user management web application built with **Node.js**, **Expr
 
 - **Runtime**: [Node.js](https://nodejs.org/)
 - **Framework**: [Express.js](https://expressjs.com/)
-- **Database**: [MySQL](https://www.mysql.com/) (`mysql2` driver)
+- **Database**: [MySQL](https://www.mysql.com/) / [TiDB Cloud](https://tidbcloud.com/) (`mysql2` driver)
 - **Templating Engine**: [EJS](https://ejs.co/)
 - **Libraries**:
   - `@faker-js/faker` - Mock data generation
@@ -32,21 +38,40 @@ A full-stack CRUD user management web application built with **Node.js**, **Expr
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | **GET** | `/` | Home page showing total registered user count |
-| **GET** | `/user` | Display all users |
+| **GET** | `/user` | Display all users in a structured table |
 | **GET** | `/user/add` | Form to register a new user |
-| **POST** | `/user` | Create a new user |
+| **POST** | `/user` | Create and store a new user |
 | **GET** | `/user/:id/edit` | Form to edit user profile |
 | **PATCH** | `/user/:id` | Update username after password check |
 | **DELETE** | `/user/:id` | Delete user from database |
 
 ---
 
-## ⚙️ Installation & Setup
+## 📂 Project Structure
+
+```text
+usercraft/
+├── views/
+│   ├── home.ejs            # Landing page with user count
+│   ├── show-users.ejs      # Table displaying all registered users
+│   ├── add.ejs             # Registration form for new users
+│   └── edit.ejs            # Profile edit form with password verification
+├── index.js                # Main server, routes, and MySQL connection
+├── schema.sql              # MySQL database schema definition
+├── style.css               # Custom stylesheet
+├── package.json            # Project dependencies & scripts
+├── .env.example            # Environment variables template
+└── README.md               # Documentation
+```
+
+---
+
+## ⚙️ Installation & Local Setup
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/<your-username>/<your-repo-name>.git
-   cd database_backend_mysql
+   git clone https://github.com/theraghavbansal/usercraft.git
+   cd usercraft
    ```
 
 2. **Install dependencies:**
@@ -89,7 +114,7 @@ A full-stack CRUD user management web application built with **Node.js**, **Expr
    ```
 
 6. **Open in browser:**
-   ```
+   ```text
    http://localhost:3000/
    ```
 
@@ -104,4 +129,3 @@ A full-stack CRUD user management web application built with **Node.js**, **Expr
 ## 📄 License
 
 This project is licensed under the MIT License.
-
